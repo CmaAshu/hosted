@@ -166,6 +166,64 @@
         </div>
     </div>
 
+    <!-- NEW: SJC Video & Info Popup (Professional Redesign) -->
+    <div id="sjcPopup" class="fixed inset-0 z-[60] bg-slate-900/90 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300" onclick="if(event.target === this) App.closeSjcPopup()">
+        <div class="bg-white rounded-[20px] shadow-2xl w-full max-w-[500px] relative overflow-hidden flex flex-col animate-fade-in-up transform transition-all">
+            
+            <!-- Close Button (Absolute, floating) -->
+            <button onclick="App.closeSjcPopup()" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-md flex items-center justify-center transition-all border border-white/20" aria-label="Close">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+
+            <!-- Video Section (Static Link Replacement) -->
+            <a href="https://www.youtube.com/watch?v=QkVVoCPjLFU&list=PLM5Q5CSb57Q3NQaygJcRa7DoK3CnwUBFF" target="_blank" class="w-full h-48 bg-slate-100 relative flex flex-col items-center justify-center group overflow-hidden no-underline">
+                <!-- Background Image (YouTube Thumbnail) -->
+                <div class="absolute inset-0 bg-[url('https://img.youtube.com/vi/QkVVoCPjLFU/hqdefault.jpg')] bg-cover bg-center opacity-60 group-hover:opacity-50 transition-opacity duration-300"></div>
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+                
+                <!-- YouTube Icon -->
+                <div class="z-10 flex flex-col items-center transform group-hover:scale-110 transition-transform duration-300">
+                    <i class="fab fa-youtube text-6xl text-red-600 bg-white rounded-xl px-1 shadow-2xl"></i>
+                    <span class="mt-3 text-white font-bold text-sm tracking-wider uppercase drop-shadow-md">Watch on YouTube</span>
+                </div>
+            </a>
+
+            <!-- Content Section (Bottom) -->
+            <div class="p-6 bg-white">
+                
+                <!-- Badge & Brand -->
+                <div class="flex items-center justify-between mb-4">
+                    <span class="bg-indigo-50 text-indigo-700 text-[11px] font-bold px-3 py-1 rounded-full tracking-wide uppercase border border-indigo-100">
+                        <i class="fas fa-play-circle mr-1"></i> Recommended Watch
+                    </span>
+                    <span class="text-slate-400 text-xs font-bold tracking-wide uppercase">SJC Institute</span>
+                </div>
+
+                <!-- Title & Description -->
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Master this Chapter</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                    Watch the concept video for the best results.
+                </p>
+
+                <!-- About SJC Institute Section -->
+                <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6 text-left">
+                    <h4 class="text-xs font-bold text-[#036176] uppercase tracking-wide mb-2 flex items-center gap-2">
+                        <i class="fas fa-graduation-cap"></i> About SJC Institute
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        This MCQ quiz is based on materials from the SJC Institute, one of the oldest institutions supporting CMA students. Their workshops and webinars are very helpful for CMA aspirants.
+                    </p>
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="App.proceedToSjcQuiz()" class="group w-full bg-[#036176] hover:bg-[#024a5a] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-cyan-900/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-95">
+                    <span>Start Practice Quiz</span>
+                    <i class="fas fa-arrow-right text-sm opacity-80 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="ad-container">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7792469883739877" data-ad-slot="AUTO_FOOTER" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -242,7 +300,27 @@
             },
             launchQuiz(type) {
                 if(!this.selectedId) return;
+                
+                // Intercept SJC type for Popup
+                if (type === 'SJC') {
+                    this.openSjcPopup();
+                    return;
+                }
+                
                 window.location.href = `paper${this.selectedId}-${type}.html`;
+            },
+            // NEW: SJC Popup methods
+            openSjcPopup() {
+                document.getElementById('sjcPopup').classList.remove('hidden');
+                document.getElementById('sjcPopup').classList.add('flex');
+            },
+            closeSjcPopup() {
+                document.getElementById('sjcPopup').classList.add('hidden');
+                document.getElementById('sjcPopup').classList.remove('flex');
+            },
+            proceedToSjcQuiz() {
+                if(!this.selectedId) return;
+                window.location.href = `paper${this.selectedId}-SJC.html`;
             }
         };
     </script>
