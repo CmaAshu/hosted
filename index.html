@@ -2,16 +2,18 @@
 <html lang="en" class="scrollbar-gutter-stable">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FLGRHV6077"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FLGRHV6077');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FLGRHV6077"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-FLGRHV6077');
+    </script>
     
     <!-- Google AdSense -->
+    <!-- CRITICAL NOTE: Your publisher ID below (8347...) differs from the ID used in the body ad slots (7792...). 
+         Please ensure both match your approved AdSense account ID, or ads may not appear. -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8347917591441247"
      crossorigin="anonymous"></script>
 
@@ -19,31 +21,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#6366f1">
 
-    <!-- Favicon -->
-<link rel="icon" href="/prepogyicon.ico" sizes="any">
+    <!-- UPDATED: Favicon Configuration for Google Search -->
+    <!-- Now pointing to the correct uploaded filenames with absolute URLs for better indexing -->
+    <link rel="icon" href="/favicon.ico">
 
-<link rel="icon" href="/prepogyicon.png" type="image/png" sizes="192x192">
-<link rel="apple-touch-icon" href="/prepogyicon.png">
-
-    
     <!-- Canonical Tag -->
     <link rel="canonical" href="https://prepogy.in/">
 
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Prepogy",
-  "alternateName": "Prepogy CMA Practice Hub",
-  "url": "https://prepogy.in/"
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Prepogy",
+      "alternateName": "Prepogy CMA Practice Hub",
+      "url": "https://prepogy.in/"
+    }
+    </script>
 
-
-    <!-- UPDATED: Simple, Navigational Title -->
+    <!-- Title -->
     <title>Prepogy - Free CMA MCQ Practice Hub (ICMAI Syllabus 2022)</title>
     
-    <!-- UPDATED: Straightforward Description with Safe Wording -->
+    <!-- Description -->
     <meta name="description" content="Free MCQ practice portal for CMA Foundation, Intermediate, and Final students. Practice questions released by the CMA Institute through publicly available examination and study materials with immediate answers and feedback.">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -172,7 +170,8 @@
         <div class="absolute top-4 right-4 md:top-8 md:right-8 z-40" id="notif-container">
             <button onclick="App.toggleNotifications()" class="relative p-3 bg-white rounded-full shadow-md text-slate-600 hover:text-indigo-600 transition-all hover:shadow-lg group">
                 <i class="fas fa-bell text-xl"></i>
-                <span class="absolute top-0 right-0 flex h-3 w-3">
+                <!-- Smart Badge: hidden by default, shown via JS if new version exists -->
+                <span id="notif-badge" class="absolute top-0 right-0 flex h-3 w-3 hidden">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500 border-2 border-white"></span>
                 </span>
@@ -472,6 +471,27 @@
         });
 
         const App = {
+            // Versioning for Notifications: Increment this '1' to a higher number (e.g. '2') 
+            // whenever you update the notification content HTML. This will make the red dot 
+            // reappear for all users.
+            currentNotificationVersion: '1',
+
+            init() {
+                this.checkNotificationStatus();
+            },
+
+            checkNotificationStatus() {
+                const lastViewedVersion = localStorage.getItem('prepogy_notif_version');
+                const badge = document.getElementById('notif-badge');
+                
+                // If user has never viewed, or version is new, show badge
+                if (lastViewedVersion !== this.currentNotificationVersion) {
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            },
+
             showView(id) {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
                 document.getElementById(id).classList.add('active');
@@ -480,8 +500,18 @@
             
             toggleNotifications() {
                 const el = document.getElementById('notif-dropdown');
+                const badge = document.getElementById('notif-badge');
+                
                 el.classList.toggle('hidden');
+                
+                // If opening the dropdown (it's not hidden anymore)
                 if (!el.classList.contains('hidden')) {
+                    // 1. Hide the red badge immediately
+                    badge.classList.add('hidden');
+                    
+                    // 2. Save current version as "viewed" in local storage
+                    localStorage.setItem('prepogy_notif_version', this.currentNotificationVersion);
+
                     const closeHandler = (e) => {
                         if (!e.target.closest('#notif-container')) {
                             el.classList.add('hidden');
@@ -514,12 +544,11 @@
                 console.log('Open Quiz:', type);
             }
         };
+
+        // Initialize App on load
+        document.addEventListener('DOMContentLoaded', () => {
+            App.init();
+        });
     </script>
 </body>
-
-
 </html>
-
-
-
-
