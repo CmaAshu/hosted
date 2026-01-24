@@ -21,9 +21,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#6366f1">
 
-    <!-- UPDATED: Favicon Configuration for Google Search -->
-   <link rel="icon" href="/favicon.ico">
-
+    <!-- UPDATED: Comprehensive Favicon Configuration for SEO & Devices -->
+    <!-- 1. Apple Touch Icon (iOS Home Screen) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- 2. Standard Browser Favicons (32x32 is often picked up by desktop search) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- 3. Android/Chrome High-Res Icons (Essential for Google Discover & Mobile Search) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    
+    <!-- 4. Legacy Fallback -->
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <!-- Canonical Tag -->
     <link rel="canonical" href="https://prepogy.in/">
@@ -33,8 +44,19 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Prepogy",
-      "alternateName": "Prepogy CMA Practice Hub",
-      "url": "https://prepogy.in/"
+      "url": "https://prepogy.in/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Prepogy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://prepogy.in/prep.png"
+        },
+        "sameAs": [
+          "https://www.instagram.com/prepogy.in/",
+          "https://whatsapp.com/channel/0029Vb77tFDKQuJFr4fbCE3c"
+        ]
+      }
     }
     </script>
 
@@ -42,7 +64,7 @@
     <title>Prepogy - Free CMA MCQ Practice Hub (ICMAI Syllabus 2022)</title>
     
     <!-- Description -->
-    <meta name="description" content="Free MCQ practice portal for CMA Foundation, Intermediate, and Final students. Practice questions released by the CMA Institute through publicly available examination and study materials with immediate answers and feedback.">
+    <meta name="description" content="Free CMA MCQ practice hub for Foundation, Intermediate, and Final (ICMAI Syllabus 2022). Practice official exam questions with instant solutions & feedback.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -228,8 +250,8 @@
         <div class="w-24 h-24 md:w-36 md:h-36 mx-auto mb-5 cursor-pointer transition-all duration-300 hover:scale-110 flex items-center justify-center animate-floating" id="logoHome" role="button" onclick="App.showView('view-home')">
             <img src="prep.png" alt="Prepogy - CMA Exam Hub Logo" width="144" height="144" class="w-full h-auto object-contain">
         </div>
-        <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-extrabold uppercase tracking-[2px] text-gradient-original mb-1">Prepogy</h1>
-        <p class="text-[0.9em] text-slate-500 font-medium tracking-wide mt-1">Free Online Practice Hub for CMA Aspirants | Foundation, Inter & Final</p>
+        <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-extrabold uppercase tracking-[2px] text-gradient-original mb-1"><span class="sr-only">CMA MCQ Practice Hub - </span>Prepogy</h1>
+        <h2 class="text-[0.9em] text-slate-500 font-medium tracking-wide mt-1">Free Online Practice Hub for CMA Aspirants | Foundation, Inter & Final</h2>
     </header>
 
     <!-- AdSense Top Banner -->
